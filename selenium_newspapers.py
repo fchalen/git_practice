@@ -5,7 +5,7 @@ import pandas as pd
 url_1='https://www.clarin.com'
 
 def driver(url):
-    wdriver = webdriver.Firefox()
+    wdriver = webdriver.Chrome()
 
     wdriver.get(url)
 
