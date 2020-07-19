@@ -1,11 +1,14 @@
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import pandas as pd
 
 url_1='https://www.clarin.com'
 
 def driver(url):
-    wdriver = webdriver.Chrome()
+    options = Options()
+    options.headless =True
+    wdriver = webdriver.Chrome(options=options)
 
     wdriver.get(url)
 
