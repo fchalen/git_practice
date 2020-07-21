@@ -7,9 +7,8 @@ url_1='https://www.clarin.com'
 
 def driver(url):
     options = Options()
-    options.add_argument("start-maximized")
-    wdriver = webdriver.Chrome(chrome_options=options, executable_path=r'/usr/bin/chromedriver.exe')
-    #wdriver = webdriver.Firefox()
+    options.headless =True
+    wdriver = webdriver.Chrome(options=options)
 
     wdriver.get(url)
 
@@ -59,5 +58,6 @@ driver_1 = driver(url_1)
 titles, urls = set_clarin_titles_urls(driver_1)
 df = pd.DataFrame({'urls': urls, 'titles' : titles})
 print(df.head(10))
+df.to_csv('clarin.csv')
 #print(df.head())
 #print(df.shape)
