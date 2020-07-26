@@ -7,8 +7,16 @@ url_1='https://www.clarin.com'
 
 def driver(url):
     options = Options()
-    options.headless =True
+    options.add_argument("--headless")
+    options.add_argument("window-size=1400,1500")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("start-maximized")
+    options.add_argument("enable-automation")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-dev-shm-usage")
     wdriver = webdriver.Chrome(options=options)
+    #wdriver = webdriver.Firefox()
 
     wdriver.get(url)
 
@@ -50,7 +58,6 @@ def set_clarin_titles_urls(driver):
         except:
             continue
     return titles, urls
-
     driver.close()
 
 #set_clarin_urls(wdriver)
@@ -58,6 +65,6 @@ driver_1 = driver(url_1)
 titles, urls = set_clarin_titles_urls(driver_1)
 df = pd.DataFrame({'urls': urls, 'titles' : titles})
 print(df.head(10))
-df.to_csv('clarin.csv')
+print(df.shape)
 #print(df.head())
 #print(df.shape)
