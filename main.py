@@ -3,7 +3,7 @@ import datetime as dt
 import pandas as pd
 
 newspaper_urls = ['https://www.infobae.com/?noredirect', 'https://www.pagina12.com.ar/', 'https://www.minutouno.com/',
-                 'https://www.tn.com.ar/', 'https://www.ellitoral.com/', 'https://www.clarin.com.ar']
+                 'https://www.tn.com.ar/', 'https://www.ellitoral.com/', 'https://www.clarin.com']
 for url in newspaper_urls:
     newspaper = Newspaper(url)
     newspaper.get_article_titles()
