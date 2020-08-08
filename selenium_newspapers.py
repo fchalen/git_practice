@@ -16,12 +16,12 @@ def driver(url):
     options.add_argument("--disable-infobars")
     options.add_argument("--disable-dev-shm-usage")
     wdriver = webdriver.Chrome(options=options)
-    #wdriver = webdriver.Firefox()
+    #wdriver = webdriver.Firefox('C:/Users/franc/Documents/PyCharm Projects/NewsScrapper/chromedriver.exe')
 
     wdriver.get(url)
 
     #INFINITE SCROLL START
-    scroll_pause_time = 0.5
+    scroll_pause_time = 0.8
 
     # Get scroll height
     last_height = wdriver.execute_script("return document.body.scrollHeight")
@@ -58,13 +58,30 @@ def set_clarin_titles_urls(driver):
         except:
             continue
     return titles, urls
+
     driver.close()
 
-#set_clarin_urls(wdriver)
-#driver_1 = driver(url_1)
-#titles, urls = set_clarin_titles_urls(driver_1)
-#df = pd.DataFrame({'urls': urls, 'titles' : titles})
-#print(df.head(10))
-#print(df.shape)
+def set_lanacion_titles_urls(driver):
+    # Get articles by CSS selector
+    arts = driver.find_elements_by_css_selector('article')
+    urls = []
+    titles = []
+    #For each article get
+    for article in arts:
+        try:
+            head = article.find_element_by_css_selector('h1, h2, h3')
+            url = article.find_element_by_css_selector('a')
+            titles.append(url.get_attribute('title'))
+            urls.append(url.get_attribute('href'))
+        except:
+            continue
+    return titles, urls
+    driver.close()
+
+driver_1 = driver(url_1)
+titles, urls = set_lanacion_titles_urls(driver_1)
+df = pd.DataFrame({'urls': urls, 'titles': titles})
+print(df.head(10))
 #print(df.head())
-#print(df.shape)
+print(df.shape)
+print(len(df))

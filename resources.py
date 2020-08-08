@@ -79,6 +79,12 @@ class Newspaper:
             return self.news_urls_list
         else:
             return self.news_urls_list
+        # LA NACION
+        #elif self.name == 'lanacion':
+        #    self.set_clarin_urls()
+        #    return self.news_urls_list
+        #else:
+        #    return self.news_urls_list
 
     def get_article_titles(self):
         """
@@ -108,6 +114,10 @@ class Newspaper:
         # CLARIN
         elif self.name == 'clarin':
             self.set_clarin_titles()
+            return self.news_titles
+        # LA NACION
+        elif self.name == 'lanacion':
+            self.set_lanacion_titles()
             return self.news_titles
 
     def get_info(self):
@@ -274,7 +284,7 @@ class Newspaper:
 
     def set_clarin_urls(self):
         """
-        Sets the variable news_urls_list to a list with all the article URLs in the EL LITORAL newspaper
+        Sets the variable news_urls_list to a list with all the article URLs in the CLARIN newspaper
         Returns the list with all urls
         Checks against blacklist to ignore URLs that do not link to articles
         """
@@ -283,6 +293,20 @@ class Newspaper:
             clarin_titles, clarin_urls = set_clarin_titles_urls(webdriver)
             self.news_urls_list = clarin_urls
             self.news_titles = clarin_titles
+        else:
+            print('ok')
+
+    def set_lanacion_urls(self):
+        """
+        Sets the variable news_urls_list to a list with all the article URLs in the LA NACION newspaper
+        Returns the list with all urls
+        Checks against blacklist to ignore URLs that do not link to articles
+        """
+        if not self.news_urls_list:
+            webdriver = driver(self.url)
+            lanacion_titles, lanacion_urls = set_lanacion_titles_urls(webdriver)
+            self.news_urls_list = lanacion_urls
+            self.news_titles = lanacion_titles
         else:
             pass
 
@@ -468,10 +492,22 @@ class Newspaper:
         if not self.news_urls_list:
             self.set_clarin_urls()
         if not self.news_titles:
-            webdriver = driver(self.url)
-            clarin_titles, clarin_urls = set_clarin_titles_urls(webdriver)
-            self.news_urls_list = clarin_urls
             self.news_titles = clarin_titles
+        else:
+            pass
+
+    def set_lanacion_titles(self):
+        """
+        Checks if the URLs list is populated, if not it runs the URL getter method to get it populated
+        Access each article URL and gets the article title
+        """
+        if not self.news_urls_list:
+            self.set_lanacion_urls()
+        if not self.news_titles:
+            webdriver = driver(self.url)
+            lanacion_titles, lanacion_urls = set_lanacion_titles_urls(webdriver)
+            self.news_urls_list = lanacion_urls
+            self.news_titles = lanacion_titles
         else:
             pass
 
