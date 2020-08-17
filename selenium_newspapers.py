@@ -15,7 +15,7 @@ def driver(url):
     options.add_argument("enable-automation")
     options.add_argument("--disable-infobars")
     options.add_argument("--disable-dev-shm-usage")
-    wdriver = webdriver.Chrome(options=options)
+    wdriver = webdriver.Chrome(options=options, executable_path='C:/Users/franc/Documents/PyCharm Projects/NewsScrapper/chromedriver.exe')
     #wdriver = webdriver.Firefox('C:/Users/franc/Documents/PyCharm Projects/NewsScrapper/chromedriver.exe')
 
     wdriver.get(url)
@@ -78,10 +78,10 @@ def set_lanacion_titles_urls(driver):
     return titles, urls
     driver.close()
 
-driver_1 = driver(url_1)
-titles, urls = set_lanacion_titles_urls(driver_1)
-df = pd.DataFrame({'urls': urls, 'titles': titles})
-print(df.head(10))
+#driver_1 = driver(url_1)
+#titles, urls = set_lanacion_titles_urls(driver_1)
+#df = pd.DataFrame({'urls': urls, 'titles': titles})
+#print(df.head(10))
 #print(df.head())
-print(df.shape)
-print(len(df))
+#print(df.shape)
+#print(len(df))
