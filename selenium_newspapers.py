@@ -15,7 +15,7 @@ def driver(url):
     options.add_argument("enable-automation")
     options.add_argument("--disable-infobars")
     options.add_argument("--disable-dev-shm-usage")
-    wdriver = webdriver.Chrome(options=options, executable_path='C:/Users/franc/Documents/PyCharm Projects/NewsScrapper/chromedriver.exe')
+    wdriver = webdriver.Chrome(options=options)
     #wdriver = webdriver.Firefox('C:/Users/franc/Documents/PyCharm Projects/NewsScrapper/chromedriver.exe')
 
     wdriver.get(url)
